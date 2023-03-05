@@ -17,30 +17,34 @@ public class PerformanceTest {
         Map<String,String> standardMap = new HashMap();
         Map<String,String> improvedMap = new ImprovedHashMap<>();
         Map<String,String> concurrentMap = new ConcurrentHashMap<>();
-        System.out.println("This is the test for standard Map based on small thread account. The time spent is:");
-        System.out.println(testMapPerformance(SMALL_THREAD_COUNT,standardMap));
-        System.out.println("This is the test for improved HashMap based on small thread account. The time spent is:");
-        System.out.println(testMapPerformance(SMALL_THREAD_COUNT,improvedMap));
-        System.out.println("This is the test for concurrent Map based on small thread account. The time spent is:");
-        System.out.println(testMapPerformance(SMALL_THREAD_COUNT,concurrentMap));
+        System.out.println(String.format("This is the test for standard Map based on small thread account. The time spent is:[%d]"
+                ,testMapPerformance(SMALL_THREAD_COUNT,standardMap)));
+        System.out.println(String.format("This is the test for improved Map based on small thread account. The time spent is:[%d]"
+                ,testMapPerformance(SMALL_THREAD_COUNT,improvedMap)));
+        System.out.println(String.format("This is the test for concurrent Map based on small thread account. The time spent is:[%d]"
+                ,testMapPerformance(SMALL_THREAD_COUNT,concurrentMap)));
         standardMap.clear();
         improvedMap.clear();
         concurrentMap.clear();
-        System.out.println("This is the test for standard Map based on medium thread account. The time spent is:");
-        System.out.println(testMapPerformance(MEDIUM_THREAD_COUNT,standardMap));
-        System.out.println("This is the test for improved HashMap based on medium thread account. The time spent is:");
-        System.out.println(testMapPerformance(MEDIUM_THREAD_COUNT,improvedMap));
-        System.out.println("This is the test for concurrent Map based on medium thread account. The time spent is:");
-        System.out.println(testMapPerformance(MEDIUM_THREAD_COUNT,concurrentMap));
+
+        System.out.println(String.format("This is the test for standard Map based on medium thread account. The time spent is:[%d]"
+                ,testMapPerformance(MEDIUM_THREAD_COUNT,standardMap)));
+        System.out.println(String.format("This is the test for improved Map based on medium thread account. The time spent is:[%d]"
+                ,testMapPerformance(MEDIUM_THREAD_COUNT,improvedMap)));
+        System.out.println(String.format("This is the test for concurrent Map based on medium thread account. The time spent is:[%d]"
+                ,testMapPerformance(MEDIUM_THREAD_COUNT,concurrentMap)));
+
         standardMap.clear();
         improvedMap.clear();
         concurrentMap.clear();
-        System.out.println("This is the test for standard Map based on large thread account. The time spent is:");
-        System.out.println(testMapPerformance(LARGE_THREAD_COUNT,standardMap));
-        System.out.println("This is the test for improved HashMap based on large thread account. The time spent is:");
-        System.out.println(testMapPerformance(LARGE_THREAD_COUNT,improvedMap));
-        System.out.println("This is the test for concurrent Map based on large thread account. The time spent is:");
-        System.out.println(testMapPerformance(LARGE_THREAD_COUNT,concurrentMap));
+
+        System.out.println(String.format("This is the test for standard Map based on large thread account. The time spent is:[%d]"
+                ,testMapPerformance(LARGE_THREAD_COUNT,standardMap)));
+        System.out.println(String.format("This is the test for improved Map based on large thread account. The time spent is:[%d]"
+                ,testMapPerformance(LARGE_THREAD_COUNT,improvedMap)));
+        System.out.println(String.format("This is the test for concurrent Map based on large thread account. The time spent is:[%d]"
+                ,testMapPerformance(LARGE_THREAD_COUNT,concurrentMap)));
+
 
 
     }
