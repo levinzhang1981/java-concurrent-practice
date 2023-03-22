@@ -3,8 +3,10 @@ package com.levin.concurrent.practice;
 import java.util.concurrent.*;
 
 public class ImprovedTestHarness {
-    public long timeTasks(int nThreads, final Runnable task)
+    public long timeTasks(int nThreads, int timeoutInSeconds,final Runnable task)
             throws InterruptedException, ExecutionException {
+        ExecutorService executorServiceForRealTask = Executors.newFixedThreadPool(nThreads);
+
         ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
         FutureTask<Long> startTask = new FutureTask<>(() -> System.nanoTime());
         FutureTask<Long> endTask = new FutureTask<>(() -> System.nanoTime());
@@ -14,14 +16,27 @@ public class ImprovedTestHarness {
             executorService.submit(()->{
                 try {
                     startGate.await();
-                    task.run();
-                    endGate.await();
+                    Future future = executorServiceForRealTask.submit(task);
+                    try {
+                        future.get(timeoutInSeconds,TimeUnit.SECONDS);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        throw new RuntimeException(e);
+                    } catch (ExecutionException e) {
+                        throw new RuntimeException(e);
+                    } catch (TimeoutException e) {
+                        future.cancel(true);
+                        System.out.println("We encounter timeout and cancel current task");
+                    } finally {
+                        endGate.await();
+                    }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     throw new RuntimeException(e);
                 } catch (BrokenBarrierException e) {
                     throw new RuntimeException(e);
                 }
+
             });
         }
         executorService.shutdown();
