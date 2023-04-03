@@ -5,7 +5,7 @@ import java.util.concurrent.*;
 public class ImprovedTestHarness {
     public long timeTasks(int nThreads, int timeoutInSeconds,final Runnable task)
             throws InterruptedException, ExecutionException {
-        ExecutorService executorServiceForRealTask = Executors.newFixedThreadPool(nThreads);
+        ExecutorService executorServiceForRealTask = new TimingThreadPool(nThreads,false);
 
         ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
         FutureTask<Long> startTask = new FutureTask<>(() -> System.nanoTime());
