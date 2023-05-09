@@ -28,4 +28,12 @@ public class ReadWriteLockedGrocery implements Grocery{
             vegetableLock.writeLock().unlock();
         }
     }
+
+    public int getFruitSize(){
+        return fruits.size();
+    }
+
+    public int getVegetableSize(){
+        return vegetables.size();
+    }
 }
