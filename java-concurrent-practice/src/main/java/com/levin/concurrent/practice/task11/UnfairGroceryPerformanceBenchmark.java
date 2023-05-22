@@ -17,7 +17,8 @@ public class UnfairGroceryPerformanceBenchmark {
     private static final int OPERATIONS_PER_THREAD = 10000;
     private static final String FRUIT = "Banana";
     private static final String VEGETABLE = "Broccoli";
-    @Param({"1", "2", "4", "8", "16", "32", "64"})
+    //@Param({"1", "2", "4", "8", "16", "32", "64"})
+    @Param({"1", "2", "4", "8", "16"})
     private int concurrencyLevel;
     private Grocery syncGrocery;
     private Grocery reentrantLockGrocery;
